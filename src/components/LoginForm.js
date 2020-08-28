@@ -1,6 +1,7 @@
-import React from "react";
-// import './styles/signupForm.css';
-import styled from "styled-components";
+import React from 'react';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+import { loginUser } from '../store/actions';
 
 export const AuthForm = styled.form`
   // border: 1px solid salmon;
@@ -47,15 +48,47 @@ export const AuthForm = styled.form`
   }
 `;
 class LoginForm extends React.Component {
+  state = {
+    credentials: {
+      username: '',
+      password: '',
+    },
+  };
+
+  handleInputChange = (e) => {
+    this.setState({
+      ...this.state,
+      credentials: {
+        ...this.state.credentials,
+        [e.target.name]: e.target.value,
+      },
+    });
+  };
+
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    console.log(this.state);
+    this.props.loginUser(this.state.credentials);
+  };
   render() {
     return (
-      <AuthForm>
+      <AuthForm onSubmit={this.handleFormSubmit}>
         <div className="left-inputs-in-form">
-          <input className="form-control" type="text" placeholder="Username" />
           <input
+            name="username"
+            className="form-control"
+            type="text"
+            placeholder="Username"
+            value={this.state.credentials.username}
+            onChange={this.handleInputChange}
+          />
+          <input
+            name="password"
             className="form-control"
             type="password"
             placeholder="Password"
+            value={this.state.credentials.password}
+            onChange={this.handleInputChange}
           />
           <button className="auth-btn">Login</button>
         </div>
@@ -64,4 +97,10 @@ class LoginForm extends React.Component {
   }
 }
 
-export default LoginForm;
+const mapStateToProps = ({ isLoading, error, token }) => ({
+  isLoading,
+  error,
+  token,
+});
+
+export default connect(mapStateToProps, { loginUser })(LoginForm);
