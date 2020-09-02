@@ -1,8 +1,8 @@
-import React from "react";
-import loginImage from "../assets/loginImage.jpg";
-import LoginForm from "../components/LoginForm";
+import React from 'react';
+import loginImage from '../assets/loginImage.jpg';
+import LoginForm from '../components/LoginForm';
 
-import "../styles/authPage.css";
+import '../styles/authPage.css';
 
 class AuthPage extends React.Component {
   changeForm = (e) => {
