@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { loginUser } from '../store/actions';
+import { withRouter } from 'react-router-dom';
 
 export const AuthForm = styled.form`
   // border: 1px solid salmon;
@@ -50,8 +51,8 @@ export const AuthForm = styled.form`
 class LoginForm extends React.Component {
   state = {
     credentials: {
-      username: '',
-      password: '',
+      username: 'chingsley',
+      password: 'testing',
     },
   };
 
@@ -68,7 +69,7 @@ class LoginForm extends React.Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
     console.log(this.state);
-    this.props.loginUser(this.state.credentials);
+    this.props.loginUser(this.state.credentials, this.props.history);
   };
   render() {
     return (
@@ -103,4 +104,4 @@ const mapStateToProps = ({ isLoading, error, token }) => ({
   token,
 });
 
-export default connect(mapStateToProps, { loginUser })(LoginForm);
+export default withRouter(connect(mapStateToProps, { loginUser })(LoginForm));
