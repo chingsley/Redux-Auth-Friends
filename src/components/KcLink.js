@@ -26,7 +26,7 @@ const Parent = styled.div`
 
       .sibling {
         // border: 3px solid yellow;
-        border-radius: 3px;
+        border-radius: 2px;
         position: absolute;
         top: 0;
         left: 0;
@@ -44,7 +44,9 @@ const Parent = styled.div`
         display: inline-block;
         width: 100%;
         height: 100%;
-        padding: 0.8rem 1rem;
+        line-height: 100%;
+        padding: 0.7rem 1.3rem;
+        // padding: 8px 20px;
         z-index: 1000;
         transition-duration: 0.5s;
       }
